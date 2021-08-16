@@ -4,6 +4,7 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import Profile from './pages/Profile';
 import Repository from './pages/Repository';
+import GlobalStyles from './styles/GlobalStyles';
 
 function App() {
   return (
@@ -15,6 +16,8 @@ function App() {
         <Route path="/:username/:reponame" element={<Repository />} />
       </Routes>
       <Footer />
+
+      <GlobalStyles />
     </BrowserRouter>
   );
 }
