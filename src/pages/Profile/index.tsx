@@ -1,7 +1,8 @@
 import React from 'react';
 import ProfileData from '../../components/ProfileData';
+import RepoCard from '../../components/RepoCard';
 
-import { Container, Main, LefSide, RightSide } from './styles';
+import { Container, Main, LefSide, RightSide, RepoCardList } from './styles';
 
 const Profile: React.FC = () => {
   return (
@@ -23,7 +24,25 @@ const Profile: React.FC = () => {
             blog={'linkedin.com/in/joaobispo2077'}
           />
         </LefSide>
-        <RightSide></RightSide>
+        <RightSide>
+          <h2>Pinned</h2>
+          <RepoCardList>
+            {[1, 2, 3, 4, 5, 6].map((item) => (
+              <li key={item}>
+                <RepoCard
+                  username={'joaobispo2077'}
+                  reponame={'quanto-tempo-falta-enem'}
+                  description={
+                    'Aplicação para conferir quanto tempo falta para o enem. (Vanilla..Js | deployed)'
+                  }
+                  language={item % 2 === 0 ? 'JavaScript' : 'TypeScript'}
+                  stars={1}
+                  forks={3}
+                />
+              </li>
+            ))}
+          </RepoCardList>
+        </RightSide>
       </Main>
     </Container>
   );

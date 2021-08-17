@@ -26,7 +26,26 @@ export const LefSide = styled.aside`
 `;
 
 export const RightSide = styled.section`
+  margin-top: var(--verticalPadding);
+
+  > h2 {
+    font-size: 16px;
+    font-weight: 500;
+  }
+
   @media (min-width: 768px) {
     width: 75%;
+  }
+`;
+
+export const RepoCardList = styled.ol`
+  margin-top: 8px;
+  display: grid;
+  grid-gap: 16px;
+
+  grid-template-columns: 1fr;
+
+  li {
+    /* margin-bottom: 16px; */
   }
 `;
