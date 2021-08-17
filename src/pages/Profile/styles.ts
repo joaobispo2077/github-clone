@@ -35,6 +35,7 @@ export const RightSide = styled.section`
 
   @media (min-width: 768px) {
     width: 75%;
+    margin: 0 8px 8px 24px;
   }
 `;
 
@@ -46,6 +47,11 @@ export const RepoCardList = styled.ol`
   grid-template-columns: 1fr;
 
   li {
-    /* margin-bottom: 16px; */
+    display: flex;
+  }
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: minmax(min-content, max-content);
   }
 `;
