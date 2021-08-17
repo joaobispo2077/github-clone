@@ -46,7 +46,7 @@ export default createGlobalStyle`
     color: var(--black);
   }
 
-  ul {
+  ul, ol, li {
     list-style: none;
   }
 `;
