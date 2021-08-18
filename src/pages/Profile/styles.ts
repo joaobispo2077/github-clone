@@ -5,6 +5,7 @@ export const Container = styled.div`
   --verticalPadding: 24px;
 
   padding: var(--verticalPadding) var(--horizontalPadding);
+  overflow-x: hidden;
 `;
 
 export const Main = styled.main`
