@@ -2,13 +2,17 @@ import React from 'react';
 
 import { Container, RepoIcon } from './styles';
 
-const TabContent: React.FC = () => {
+export type TabContentProps = {
+  public_repos: number;
+};
+
+const TabContent: React.FC<TabContentProps> = ({ public_repos }) => {
   return (
     <Container>
       <div className="content">
         <RepoIcon />
         <span className="label">Repositories</span>
-        <span className="number">75</span>
+        <span className="number">{public_repos}</span>
       </div>
     </Container>
   );
