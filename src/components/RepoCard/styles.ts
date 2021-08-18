@@ -11,6 +11,7 @@ export const Container = styled.article`
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
+  flex: 1;
 
   > p {
     margin: 8px 0 16px;
