@@ -2,6 +2,7 @@ import React from 'react';
 import ProfileData from '../../components/ProfileData';
 import RandomCalendar from '../../components/RandomCalendar';
 import RepoCard from '../../components/RepoCard';
+import TabList from '../../components/TabList';
 
 import {
   Container,
@@ -33,6 +34,7 @@ const Profile: React.FC = () => {
           />
         </LefSide>
         <RightSide>
+          <TabList />
           <h2>Pinned</h2>
           <RepoCardList>
             {[1, 2, 3, 4, 5, 6].map((item) => (

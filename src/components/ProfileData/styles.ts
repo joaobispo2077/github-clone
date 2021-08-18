@@ -15,6 +15,7 @@ export const Container = styled.div`
 `;
 
 export const Avatar = styled.img`
+  z-index: 5;
   width: 16%;
   border-radius: 50%;
 
