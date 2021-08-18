@@ -3,10 +3,17 @@ import TabContent from '../TabContent';
 
 import { Container } from './styles';
 
-const TabList: React.FC = () => {
+export type TabListProps = {
+  dispositive: 'mobile' | 'desktop';
+};
+
+const TabList: React.FC<TabListProps> = ({ dispositive }) => {
   return (
-    <Container className="mobile">
-      <TabContent />
+    <Container className={dispositive}>
+      <div className="wrapper">
+        <span className="offset" />
+        <TabContent />
+      </div>
       <span className="line"></span>
     </Container>
   );

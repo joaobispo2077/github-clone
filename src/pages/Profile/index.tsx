@@ -16,6 +16,7 @@ import {
 const Profile: React.FC = () => {
   return (
     <Container>
+      <TabList dispositive={'desktop'} />
       <Main>
         <LefSide>
           <ProfileData
@@ -34,7 +35,7 @@ const Profile: React.FC = () => {
           />
         </LefSide>
         <RightSide>
-          <TabList />
+          <TabList dispositive={'mobile'} />
           <h2>Pinned</h2>
           <RepoCardList>
             {[1, 2, 3, 4, 5, 6].map((item) => (
