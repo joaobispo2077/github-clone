@@ -30,6 +30,7 @@ export const LefSide = styled.aside`
 
 export const RightSide = styled.section`
   margin-top: var(--verticalPadding);
+  padding: 0 var(--horizontalPadding);
 
   > h2 {
     font-size: 16px;
@@ -47,10 +48,6 @@ export const RepoCardList = styled.ol`
   grid-gap: 16px;
 
   grid-template-columns: 1fr;
-
-  li {
-    display: flex;
-  }
 
   @media (min-width: 768px) {
     grid-template-columns: 1fr 1fr;
