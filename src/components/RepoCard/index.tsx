@@ -13,10 +13,10 @@ import {
 export type RepoCardProps = {
   username: string;
   reponame: string;
-  description: string;
-  language: string;
   stars: number;
   forks: number;
+  description?: string;
+  language?: string;
 };
 
 const RepoCard: React.FC<RepoCardProps> = ({
@@ -36,7 +36,7 @@ const RepoCard: React.FC<RepoCardProps> = ({
         <Link to={`${username}/${reponame}`}>{reponame}</Link>
       </TopSide>
 
-      <p>{description}</p>
+      {description && <p>{description}</p>}
 
       <Botside>
         <ul>
