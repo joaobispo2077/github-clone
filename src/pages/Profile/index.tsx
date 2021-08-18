@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useParams } from 'react-router';
 import ProfileData from '../../components/ProfileData';
 import RandomCalendar from '../../components/RandomCalendar';
 import RepoCard from '../../components/RepoCard';
@@ -13,42 +14,104 @@ import {
   CalendarHeading,
 } from './styles';
 
+export interface APIUser {
+  login: string;
+  name: string;
+  avatar_url: string;
+  followers: number;
+  following: number;
+  public_repos: number;
+  bio?: string;
+  email?: string;
+  company?: string;
+  blog?: string;
+  location?: string;
+}
+
+export interface APIRepo {
+  name: string;
+  owner: {
+    login: string;
+  };
+  stargazes_count: number;
+  forks: number;
+  html_url: string;
+  language?: string;
+  description?: string;
+}
+
 const Profile: React.FC = () => {
+  const [user, setUser] = useState<APIUser>();
+  const [repos, setRepos] = useState<APIRepo[]>();
+  const [error, setError] = useState<string>();
+
+  const { username = 'joaobispo2077' } = useParams();
+
+  const handleLoadUserData = useCallback(async () => {
+    console.log('chargeds');
+    const [userResponse, repoListResponse] = await Promise.all([
+      fetch(`https://api.github.com/users/${username}`),
+      fetch(`https://api.github.com/users/${username}/repos`),
+    ]);
+
+    if (userResponse.status === 404) {
+      setError('User not found');
+      return;
+    }
+
+    const userData = await userResponse.json();
+    const repoList = await repoListResponse.json();
+
+    const shuffledRepos = repoList.sort(() => 0.5 - Math.random());
+    const slicedRepos = shuffledRepos.slice(0, 6);
+
+    setUser(userData);
+    setRepos(slicedRepos);
+  }, [username]);
+
+  useEffect(() => {
+    handleLoadUserData();
+  }, [handleLoadUserData]);
+
+  if (error) {
+    return <h1>{error}</h1>;
+  }
+
+  if (!user || !repos) {
+    return <h1>Loading...</h1>;
+  }
+
   return (
     <Container>
-      <TabList dispositive={'desktop'} />
+      <TabList dispositive={'desktop'} public_repos={user.public_repos} />
       <Main>
         <LefSide>
           <ProfileData
-            username={'joaobispo2077'}
-            name={'João Bispo'}
-            avatarUrl={'http://www.github.com/joaobispo2077.png'}
-            bio={
-              '\r\nA full-stack developer who loves to apply his knowledge to solve problems, and aims to create amazing products and impact lives.'
-            }
-            followers={2}
-            following={1}
-            company={'Savelivez'}
-            location={'São Paulo, Brazil'}
-            email={'joaobispo2077@gmail.com'}
-            blog={'linkedin.com/in/joaobispo2077'}
+            username={user.login}
+            name={user.name}
+            avatarUrl={user.avatar_url}
+            bio={user.bio}
+            followers={user.followers}
+            following={user.following}
+            company={user.company}
+            location={user.location}
+            email={user.email}
+            blog={user.blog}
           />
         </LefSide>
         <RightSide>
-          <TabList dispositive={'mobile'} />
+          <TabList dispositive={'mobile'} public_repos={user.public_repos} />
           <h2>Pinned</h2>
           <RepoCardList>
-            {[1, 2, 3, 4, 5, 6].map((item) => (
-              <li key={item}>
+            {repos.map((repo) => (
+              <li key={repo.name}>
                 <RepoCard
-                  username={'joaobispo2077'}
-                  reponame={'quanto-tempo-falta-enem'}
-                  description={
-                    'Aplicação para conferir quanto tempo falta para o enem. (Vanilla..Js | deployed)'
-                  }
-                  language={item % 2 === 0 ? 'JavaScript' : 'TypeScript'}
-                  stars={1}
-                  forks={3}
+                  username={repo.owner.login}
+                  reponame={repo.name}
+                  description={repo.description}
+                  language={repo.language}
+                  stars={repo.stargazes_count}
+                  forks={repo.forks}
                 />
               </li>
             ))}
