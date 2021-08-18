@@ -20,6 +20,8 @@ export const Main = styled.main`
 `;
 
 export const LefSide = styled.aside`
+  padding: 0 var(--horizontalPadding);
+
   @media (min-width: 768px) {
     width: 25%;
   }
@@ -35,7 +37,6 @@ export const RightSide = styled.section`
 
   @media (min-width: 768px) {
     width: 75%;
-    margin: 0 8px 8px 24px;
   }
 `;
 
@@ -54,4 +55,10 @@ export const RepoCardList = styled.ol`
     grid-template-columns: 1fr 1fr;
     grid-auto-rows: minmax(min-content, max-content);
   }
+`;
+
+export const CalendarHeading = styled.span`
+  font-size: 16px;
+  margin: 36px 0 9px;
+  display: inline-flex;
 `;
