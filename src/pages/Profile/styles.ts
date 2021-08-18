@@ -49,6 +49,11 @@ export const RepoCardList = styled.ol`
 
   grid-template-columns: 1fr;
 
+  li {
+    display: flex;
+    flex: 1;
+  }
+
   @media (min-width: 768px) {
     grid-template-columns: 1fr 1fr;
     grid-auto-rows: minmax(min-content, max-content);
