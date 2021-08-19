@@ -48,7 +48,6 @@ const Profile: React.FC = () => {
   const { username = 'joaobispo2077' } = useParams();
 
   const handleLoadUserData = useCallback(async () => {
-    console.log('chargeds');
     const [userResponse, repoListResponse] = await Promise.all([
       fetch(`https://api.github.com/users/${username}`),
       fetch(`https://api.github.com/users/${username}/repos`),
