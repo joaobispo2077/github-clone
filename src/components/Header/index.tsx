@@ -1,12 +1,29 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import React, {
+  ChangeEvent,
+  Dispatch,
+  FormEvent,
+  SetStateAction,
+  useState,
+} from 'react';
 import { useNavigate } from 'react-router';
+import { ThemeName } from '../../styles/themes';
 
 import { Container, GithubLogo, SearchForm } from './styles';
 
-const Header: React.FC = () => {
+export type HeaderProps = {
+  themeName: ThemeName;
+  setThemeName: Dispatch<SetStateAction<ThemeName>>;
+};
+
+const Header: React.FC<HeaderProps> = ({ themeName, setThemeName }) => {
   const navigate = useNavigate();
 
   const [searchQuery, setSearchQuery] = useState<string>('');
+
+  const handleToggleTheme = () => {
+    const newTheme = themeName === 'light' ? 'dark' : 'light';
+    setThemeName(newTheme);
+  };
 
   const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.currentTarget.value);
@@ -26,7 +43,7 @@ const Header: React.FC = () => {
 
   return (
     <Container>
-      <GithubLogo />
+      <GithubLogo onClick={handleToggleTheme} arial-label="Toggle theme" />
       <SearchForm onSubmit={handleSearch}>
         <input
           placeholder="Search or jump to..."

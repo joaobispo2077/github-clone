@@ -17,7 +17,7 @@ function App() {
   return (
     <BrowserRouter>
       <ThemeProvider theme={currentTheme}>
-        <Header />
+        <Header themeName={themeName} setThemeName={setThemeName} />
         <Routes>
           <Route path="/" element={<Profile />} />
           <Route path="/:username" element={<Profile />} />
