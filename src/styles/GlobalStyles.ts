@@ -22,11 +22,14 @@ export default createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
+    transition: background-color 0.2s ease-out;
   }
 
   html {
     min-height: 100%;
     background: var(--primary);
+
   }
 
   *, button, input {
@@ -34,6 +37,8 @@ export default createGlobalStyle`
     background: none;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
     color: var(--black);
+
+    transition: color 0.2s ease-out;
   }
 
   ul, ol, li {
