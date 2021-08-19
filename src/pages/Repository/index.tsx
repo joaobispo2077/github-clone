@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 import {
   Container,
@@ -13,12 +13,56 @@ import {
 } from './styles';
 
 const Repository: React.FC = () => {
-  const username = 'joaobispo2077';
-  const reponame = 'happy';
-  const description =
-    'O Happy é uma plataforma que mapeia orfanatos com o intuito de doadores de sonhos e instituições encontrarem-os de forma eficiente.';
-  const stars = 3;
-  const forks = 0;
+  const location = useLocation();
+
+  const [username, setUsername] = useState<string>();
+  const [reponame, setReponame] = useState<string>();
+  const [description, setDescription] = useState<string>();
+  const [stars, setStars] = useState<number>();
+  const [forks, setForks] = useState<number>();
+  const [error, setError] = useState<string>();
+
+  const handleLoadRepoData = useCallback(
+    async (username: string, reponame: string) => {
+      console.log('charge');
+      setUsername(username);
+      setReponame(reponame);
+
+      const response = await fetch(
+        `https://api.github.com/repos/${username}/${reponame}`,
+      );
+
+      if (response.status === 404) {
+        setError('Repositório não encontrado');
+        return;
+      }
+
+      const repodata = await response.json();
+
+      setDescription(repodata.description);
+      setStars(repodata.stargazers_count);
+      setForks(repodata.forks);
+    },
+    [],
+  );
+
+  useEffect(() => {
+    const [, searchUsername, searchReponame] = location.pathname.split('/');
+
+    if (!searchUsername || !searchReponame) {
+      setError('Digite o nome da conta e do repositório');
+      return;
+    }
+
+    setUsername(searchUsername.trim());
+    setReponame(searchReponame.trim());
+
+    handleLoadRepoData(searchUsername.trim(), searchReponame.trim());
+  }, [handleLoadRepoData, location]);
+
+  if (error) {
+    return <h1>{error}</h1>;
+  }
 
   return (
     <Container>
