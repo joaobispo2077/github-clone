@@ -1,9 +1,14 @@
 import React from 'react';
 
-// import { Container } from './styles';
+import { Container, Line, GithubIcon } from './styles';
 
 const Footer: React.FC = () => {
-  return <div>Footer</div>;
+  return (
+    <Container>
+      <Line />
+      <GithubIcon />
+    </Container>
+  );
 };
 
 export default Footer;

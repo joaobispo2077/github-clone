@@ -21,7 +21,7 @@ const Header: React.FC = () => {
     if (!hasSearchQuery) return;
     console.info('go to repo or user page');
 
-    return navigate(`/${searchQuery}`);
+    return navigate(`/${searchQuery.trim()}`);
   };
 
   return (
